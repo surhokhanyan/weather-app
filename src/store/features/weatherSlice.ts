@@ -12,12 +12,14 @@ const initialState: WeatherInitialStateTypes = {
     currentWeatherData: {
         name: "",
         main: { temp: 0 },
-        weather: {
-            description: "",
-            icon: "",
-            id: 0,
-            main: "",
-        },
+        weather: [
+            {
+                description: "",
+                icon: "",
+                id: 0,
+                main: "",
+            },
+        ],
     },
     choosedDaysWeather: 0,
     dailyList: {
@@ -77,7 +79,7 @@ const weatherSlice = createSlice({
                 state.dailyList.list = action.payload.dailyForecast.list;
                 state.currentWeatherData.name = action.payload.currentWeather.name;
                 state.currentWeatherData.main.temp = action.payload.currentWeather.main.temp;
-                state.currentWeatherData.weather = action.payload.currentWeather.weather[0];
+                state.currentWeatherData.weather = action.payload.currentWeather.weather;
                 state.fetchDataError = false;
             })
             .addCase(fetchDailyAndCurrentWeatherAsync.rejected, (state) => {

@@ -32,12 +32,14 @@ export interface WeatherInitialStateTypes {
     currentWeatherData: {
         name: string;
         main: { temp: number };
-        weather: {
-            description: string;
-            icon: string;
-            id: number;
-            main: string;
-        };
+        weather: [
+            {
+                description: string;
+                icon: string;
+                id: number;
+                main: string;
+            }
+        ];
     };
     choosedDaysWeather: number;
     dailyList: {

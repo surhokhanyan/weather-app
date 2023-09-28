@@ -24,7 +24,11 @@ const WeatherPage = () => {
     } else {
         mainDegree = isCelsius ? currentWeatherData.main.temp.toFixed(1) : (currentWeatherData.main.temp * (9 / 5) + 32).toFixed(1);
     }
-    const dailyWeatherByTime = dailyList.list.filter((item) => item.dt_txt.includes("15:00:00"));
+    const today = new Date().toISOString().split("T")[0];
+    const dailyWeatherByTime = [
+        { dt_txt: today, ...currentWeatherData },
+        ...dailyList.list.filter((item) => !item.dt_txt.includes(today) && item.dt_txt.includes("15:00:00")),
+    ];
     const dailyWeatherByDay = dailyList.list.filter((item) => item.dt_txt.includes(whichDay));
 
     const celsiusOrFahrenheit = isCelsius ? "°C" : "°F";
@@ -70,8 +74,8 @@ const WeatherPage = () => {
                         <p>
                             {mainDegree} {celsiusOrFahrenheit}
                         </p>
-                        {currentWeatherData.weather.icon && (
-                            <img src={`https://openweathermap.org/img/wn/${currentWeatherData.weather.icon}@2x.png`} alt="Weather Icon" />
+                        {currentWeatherData.weather[0].icon && (
+                            <img src={`https://openweathermap.org/img/wn/${currentWeatherData.weather[0].icon}@2x.png`} alt="Weather Icon" />
                         )}
                     </div>
                     <div className={styles.weather_daily}>

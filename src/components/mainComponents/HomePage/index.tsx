@@ -19,7 +19,7 @@ const HomePage = () => {
             <div className={styles.current_weather_wrapper}>
                 <p>{currentWeatherData.name}</p>
                 <p>{currentWeatherData.main.temp.toFixed(1)} &#8451;</p>
-                <img src={`https://openweathermap.org/img/wn/${currentWeatherData.weather.icon}@2x.png`} alt="icon" />
+                <img src={`https://openweathermap.org/img/wn/${currentWeatherData.weather[0].icon}@2x.png`} alt="icon" />
             </div>
         </div>
     );
